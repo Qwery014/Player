@@ -6,8 +6,8 @@ import SideBar from './components/SideBar';
 function App() {
   const burger = useSelector((state) => state.style.burger);
   return (
-    <div className='content'
-      style={{ gridTemplateColumns: `${burger ? "300px" : "0px"} 1fr` }}
+    <div
+      className={`content ${burger ? "content-burger" : ""}`}
     >
       <SideBar />
       <Player />

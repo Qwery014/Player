@@ -26,7 +26,7 @@ const SideBar = () => {
   return (
     <>
       <div className="sidebar">
-        <div className="sidebar__wrapper">
+        <div className={`sidebar__wrapper ${burger ? "sidebar__wrapper-active" : ""}`}>
           <a
             className={`burger ${burger ? "burger-active" : ""}`}
             onClick={() => dispatch(clickBurger())}

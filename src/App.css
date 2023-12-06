@@ -20,6 +20,21 @@ body {
 .content {
 	display: grid;
 	transition: .2s;
+	grid-template-columns: 0px 1fr;
+}
+
+.content-burger {
+	grid-template-columns: 300px 1fr;
+}
+
+@media (max-width: 650px) {
+	.content {
+		grid-template-columns: 1fr;
+	}
+
+	.content-burger {
+		grid-template-columns: 1fr;
+	}
 }
 
 h1,
