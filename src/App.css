@@ -11,9 +11,15 @@ body {
 	font-family: Arial, sans-serif;
 	width: 100%;
 	min-height: 100vh;
+	position: relative;
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
+}
+
+.content {
+	display: grid;
+	transition: .2s;
 }
 
 h1,
@@ -71,4 +77,23 @@ fieldset {
 
 img {
 	max-width: 100%;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #4d4d4d;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #636363;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #4b4b4b;
 }

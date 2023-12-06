@@ -1,34 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "../styles/Player.scss";
-import q from "../assets/music/Don't Stop Me Now/Queen - Don't Stop Me Now (Official Video).mp3";
-import qImg from "../assets/music/Don't Stop Me Now/27ca78589c387bdc552e46281ba71bd2.jpg";
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa";
 import { TbPlayerSkipForwardFilled } from "react-icons/tb";
+import { useDispatch, useSelector } from 'react-redux';
+import { switchTrack } from "../store/style/styleSlice";
 import { trackList } from './consts';
 
 
 const Player = () => {
+  const trackId = useSelector((state) => state.style.trackId);
+  const dispatch = useDispatch();
+
   const [play, setPlay] = useState(false);
   const [timeline, setTimeline] = useState("0");
   const [percent, setPercent] = useState(0);
   const [step, setStep] = useState(null);
-  const [queue, setQueue] = useState(0);
   const [curr, setCurr] = useState(null);
 
   useEffect(() => {
-    setCurr(trackList[queue]);
-  }, [queue, trackList]);
+    setCurr(trackList[trackId]);
+  }, [trackId, trackList]);
 
   function changeQueue(i) {
     if (i > trackList.length - 1) {
-      setQueue(0);
+      dispatch(switchTrack(0));
       console.log(i)
     } else if (i < 0) {
-      setQueue(trackList.length - 1);
+      dispatch(switchTrack(trackList.length - 1));
       console.log(trackList.length - 1);
     } else {
-      setQueue(i)
+      dispatch(switchTrack(i));
       console.log(i)
     }
     setTimeout(() => {
@@ -98,7 +100,7 @@ const Player = () => {
                   <div className="player__info_controls">
                     <button
                       className="player__info_controls-item control-prev"
-                      onClick={() => changeQueue(queue - 1)}
+                      onClick={() => changeQueue(trackId - 1)}
                     >
                       <TbPlayerSkipForwardFilled />
                     </button>
@@ -115,7 +117,7 @@ const Player = () => {
                     }
                     <button
                       className="player__info_controls-item control-next"
-                      onClick={() => changeQueue(queue + 1)}
+                      onClick={() => changeQueue(trackId + 1)}
                     >
                       <TbPlayerSkipForwardFilled />
                     </button>
@@ -142,8 +144,7 @@ const Player = () => {
                       controls
                       src={curr.music}
                       ref={audio}
-                      onEnded={() => { changeQueue(queue + 1); setPlay(!play) }}
-                      canplaythrough
+                      onEnded={() => { changeQueue(trackId + 1); setPlay(!play) }}
                       onTimeUpdate={(e) => {
                         setTimeline(e.target.currentTime);
                         setPercent((e.target.currentTime / e.target.duration) * 100);
