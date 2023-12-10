@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Player/static/css/main.3265eafd.css",
-    "main.js": "/Player/static/js/main.390cd71a.js",
+    "main.css": "/Player/static/css/main.f1148cdb.css",
+    "main.js": "/Player/static/js/main.6f04827a.js",
     "static/media/Queen - Don't Stop Me Now (Official Video).mp3": "/Player/static/media/Queen - Don't Stop Me Now (Official Video).d55a347196c1324727a9.mp3",
     "static/media/Billie Eilish - Bellyache.mp3": "/Player/static/media/Billie Eilish - Bellyache.13f978fe7ce629f9affc.mp3",
     "static/media/Modern Talking - Cheri Cheri Lady (Official Music Video).mp3": "/Player/static/media/Modern Talking - Cheri Cheri Lady (Official Music Video).a7605897bd9b89d99d84.mp3",
@@ -11,11 +11,11 @@
     "static/media/jpg": "/Player/static/media/27ca78589c387bdc552e46281ba71bd2.17e05ff678325fd103e9.jpg",
     "static/media/maxresdefault.jpg": "/Player/static/media/maxresdefault.4a0ba44b6f4ebed50548.jpg",
     "index.html": "/Player/index.html",
-    "main.3265eafd.css.map": "/Player/static/css/main.3265eafd.css.map",
-    "main.390cd71a.js.map": "/Player/static/js/main.390cd71a.js.map"
+    "main.f1148cdb.css.map": "/Player/static/css/main.f1148cdb.css.map",
+    "main.6f04827a.js.map": "/Player/static/js/main.6f04827a.js.map"
   },
   "entrypoints": [
-    "static/css/main.3265eafd.css",
-    "static/js/main.390cd71a.js"
+    "static/css/main.f1148cdb.css",
+    "static/js/main.6f04827a.js"
   ]
 }
