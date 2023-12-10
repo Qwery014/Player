@@ -5,14 +5,23 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
 import { clickBurger, searching } from "../store/style/styleSlice"
 import SideBarItem from './SideBarItem';
+import { trackList } from './consts';
+import { isColorDark } from '../helpers/func';
 
 const SideBar = () => {
   const burger = useSelector((state) => state.style.burger);
-  const trackList = useSelector((state) => state.style.trackList);
+  const trackListSearch = useSelector((state) => state.style.trackList);
+  const trackId = useSelector((state) => state.style.trackId);
   const dispatch = useDispatch();
 
   const [inpLength, setInpLength] = useState(0);
   const [search, setSearch] = useState("");
+
+  const [curr, setCurr] = useState(null);
+
+  useEffect(() => {
+    setCurr(trackList[trackId]);
+  }, [trackId, trackList]);
 
   function handleSearch(e) {
     setSearch(e.target.value);
@@ -23,15 +32,29 @@ const SideBar = () => {
     setInpLength(search.length);
   }, [search])
 
+  function burgerColor() {
+    if (curr) {
+      if (isColorDark(curr.mainColor)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   return (
     <>
-      <div className="sidebar">
+      <div className={`sidebar ${burger ? "sidebar-active" : ""}`}>
         <div className={`sidebar__wrapper ${burger ? "sidebar__wrapper-active" : ""}`}>
           <a
             className={`burger ${burger ? "burger-active" : ""}`}
             onClick={() => dispatch(clickBurger())}
           >
-            <span className="burger-line"></span>
+            <span
+              className={
+                `burger-line ${burgerColor() ? "burger-light" : "burger-dark"}`
+              }
+            ></span>
           </a>
           <div className="sidebar__main">
             <label className="sidebar__main_search" htmlFor="search">
@@ -58,7 +81,7 @@ const SideBar = () => {
             </label>
             <div className="sidebar__main_list">
               {
-                trackList?.map((e, i) => <SideBarItem item={e} key={i} />)
+                trackListSearch?.map((e, i) => <SideBarItem item={e} key={i} />)
               }
             </div>
           </div>

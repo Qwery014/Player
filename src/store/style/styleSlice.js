@@ -26,6 +26,7 @@ export const styleSlice = createSlice({
     // 
     switchTrack: (state, action) => {
       state.trackId = action.payload;
+      state.burger = false;
     }
   },
 })

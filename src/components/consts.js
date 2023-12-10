@@ -16,23 +16,47 @@ export const trackList = [
     author: "Billie Eilish",
     music: audio1,
     cover: cover1,
+    mainColor: "#000000",
+    colors: [
+      "#DEB128",
+      "#212624",
+      "#FFFFFF",
+    ]
   }, {
     id: 2,
     name: "Cheri Cheri Lady",
     author: "Modern Talking",
     music: audio2,
     cover: cover2,
+    mainColor: "#CC7097",
+    colors: [
+      "#DEB128",
+      "#212624",
+      "#FFFFFF",
+    ]
   }, {
     id: 3,
     name: "Don't Stop Me Now",
     author: "Queen",
     music: audio3,
     cover: cover3,
+    mainColor: "#000000",
+    colors: [
+      "#DEB128",
+      "#212624",
+      "#FFFFFF",
+    ]
   }, {
     id: 4,
     name: "Sarà perchè ti amo",
     author: "Ricchi e poveri",
     music: audio4,
     cover: cover4,
+    mainColor: "#96BCC3",
+    colors: [
+      "#DEB128",
+      "#212624",
+      "#FFFFFF",
+    ]
   }
 ]

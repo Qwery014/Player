@@ -6,6 +6,7 @@ import { TbPlayerSkipForwardFilled } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
 import { switchTrack } from "../store/style/styleSlice";
 import { trackList } from './consts';
+import { isColorDark } from '../helpers/func';
 
 
 const Player = () => {
@@ -17,6 +18,7 @@ const Player = () => {
   const [percent, setPercent] = useState(0);
   const [step, setStep] = useState(null);
   const [curr, setCurr] = useState(null);
+  const [isFirst, setIsFirst] = useState(0);
 
   useEffect(() => {
     setCurr(trackList[trackId]);
@@ -24,18 +26,18 @@ const Player = () => {
 
   function changeQueue(i) {
     if (i > trackList.length - 1) {
+      setPlay(false);
       dispatch(switchTrack(0));
       console.log(i)
     } else if (i < 0) {
+      setPlay(false);
       dispatch(switchTrack(trackList.length - 1));
       console.log(trackList.length - 1);
     } else {
+      setPlay(false);
       dispatch(switchTrack(i));
       console.log(i)
     }
-    setTimeout(() => {
-      setPlay(!play);
-    }, 1000);
   }
 
 
@@ -52,39 +54,80 @@ const Player = () => {
     setPercent(e.target.value / (audio.current.duration / 100));
   }
 
-
-
   useEffect(() => {
     if (audio.current) {
       play ? audio.current.play() : audio.current.pause();
     }
-  }, [play, audio.current]);
+  }, [play]);
 
-  useEffect(() => {
-    const currentAudio = audio.current;
-    if (currentAudio) {
-      const handleLoadedMetadata = () => {
-        setDuration({
-          durMin: Math.floor(currentAudio.duration / 60),
-          durSec: Math.floor(currentAudio.duration % 60) > 9
-            ? Math.floor(currentAudio.duration % 60)
-            : `0${Math.floor(currentAudio.currentTime % 60)}`,
-        });
-        setStep(100 / currentAudio.duration);
-      };
+  function pauseFunc() {
+    setPlay(false);
+    console.log("pause");
+  }
+  function playFunc() {
+    setPlay(true);
+    console.log("play");
+  }
 
-      currentAudio.addEventListener('loadedmetadata', handleLoadedMetadata);
+  function onLoaded(currentAudio) {
+    setDuration({
+      durMin: Math.floor(currentAudio.duration / 60),
+      durSec: Math.floor(currentAudio.duration % 60) > 9
+        ? Math.floor(currentAudio.duration % 60)
+        : `0${Math.floor(currentAudio.currentTime % 60)}`,
+    });
+    setStep(100 / currentAudio.duration);
 
-      return () => {
-        currentAudio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      };
+    if (isFirst) {
+      setTimeout(() => {
+        setPlay(true);
+      }, 1000);
+      console.log(play)
+    } else {
+      setIsFirst(1);
     }
-  }, [audio.current, curr]);
-
+  }
 
   return (
     <div className='player'>
-      <div className="player__container">
+      <div
+        className="player__background"
+        style={{
+          backgroundColor: curr ? curr.mainColor : "#000",
+        }}
+      >
+        <div className={`balls-wrapper ${play ? "balls-wrapper-anim" : ""}`}>
+          <div
+            className="ball-1"
+            style={{
+              width: play ? "20vw" : 0,
+              height: play ? "20vw" : 0
+            }}
+          ></div>
+          <div
+            className="ball-2"
+            style={{
+              width: play ? "20vw" : 0,
+              height: play ? "20vw" : 0
+            }}
+          ></div>
+          <div
+            className="ball-3"
+            style={{
+              width: play ? "20vw" : 0,
+              height: play ? "20vw" : 0
+            }}
+          ></div>
+        </div>
+      </div>
+      <div className="player__container"
+        style={{ color: curr ? isColorDark(curr.mainColor) ? ("#ffffff") : ("#000000") : "", }}>
+        <div
+          className="player__container_background"
+          style={{
+            backgroundColor: curr ? isColorDark(curr.mainColor) ? ("#ffffff50") : ("#00000050") : "",
+          }}
+        ></div>
         <div className="player__wrapper">
           {
             curr && curr.cover && curr.name && curr.author && curr.music ? (
@@ -106,11 +149,17 @@ const Player = () => {
                     </button>
                     {
                       play ? (
-                        <button className="player__info_controls-item control-pause" onClick={() => setPlay(!play)}>
+                        <button
+                          className="player__info_controls-item control-pause"
+                          onClick={pauseFunc}
+                        >
                           <FaPause />
                         </button>
                       ) : (
-                        <button className="player__info_controls-item control-play" onClick={() => setPlay(!play)}>
+                        <button
+                          className="player__info_controls-item control-play"
+                          onClick={playFunc}
+                        >
                           <FaPlay />
                         </button>
                       )
@@ -149,6 +198,10 @@ const Player = () => {
                         setTimeline(e.target.currentTime);
                         setPercent((e.target.currentTime / e.target.duration) * 100);
                       }}
+                      onLoadedMetadata={e => onLoaded(e.target)}
+                      onPause={pauseFunc}
+                      onPlay={playFunc}
+                      onDurationChange={() => console.log("changed")}
                     />
                   </div>
                 </div>

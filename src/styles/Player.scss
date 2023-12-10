@@ -2,19 +2,105 @@
 
 .player {
   font-family: "Open Sans";
-  background-color: red;
   display: flex;
   min-height: 100vh;
   padding: 60px 0;
   align-items: center;
   justify-content: center;
+  &__background {
+    z-index: 2;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    filter: blur(4px);
+    .balls-wrapper {
+      position: relative;
+      height: 100vw;
+      width: 100vw;
+      transition: 0.2s;
+      animation: balls infinite 10s linear;
+      animation-play-state: paused;
+    }
+    .balls-wrapper-anim {
+      animation-play-state: running;
+    }
+    .ball-1 {
+      position: absolute;
+      background-color: red;
+      border-radius: 100%;
+      top: 50%;
+      left: 55%;
+      transition: 1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ball-2 {
+      position: absolute;
+      background-color: blue;
+      border-radius: 100%;
+      top: 80%;
+      left: 45%;
+      transition: 1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ball-3 {
+      position: absolute;
+      background-color: green;
+      border-radius: 100%;
+      top: 65%;
+      left: 50%;
+      transition: 1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes balls {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
   &__container {
     width: 300px;
     padding: 10px;
-    background-color: blue;
     border-radius: $radius;
+    z-index: 3;
+    position: relative;
+    overflow: hidden;
+    &_background {
+      z-index: 2;
+      position: absolute;
+      top: -10px;
+      bottom: -10px;
+      left: -10px;
+      right: -10px;
+      background-color: #ffffff50;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      filter: blur(4px);
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.23);
+    }
   }
   &__wrapper {
+    z-index: 4;
+    position: relative;
   }
   &__img {
     background-repeat: no-repeat;
@@ -52,6 +138,7 @@
         border-radius: 50%;
         transition: 0.2s;
         border: 1px solid #fff;
+        color: #000;
         svg {
           height: 20px;
           width: 20px;
@@ -81,7 +168,6 @@
       &-duration {
         display: flex;
         justify-content: space-between;
-        color: #fff;
         padding: 0 10px;
         .duration {
           font-size: 0.9rem;
@@ -92,7 +178,7 @@
         height: 4px;
         border: none;
         border-radius: 100px;
-        background-color: #aaa;
+        background-color: #000000;
         background-image: linear-gradient(#fff, #fff);
         background-repeat: no-repeat;
         cursor: pointer;
