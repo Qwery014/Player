@@ -3,9 +3,9 @@
 .sidebar {
   position: relative;
   width: 100%;
-  transition: 0.6s ease-in-out;
+  transition: 0.4s ease-in-out;
   z-index: 10;
-  @media (max-width: 650px) {
+  @media (max-width: 700px) {
     & {
       position: fixed;
       top: 0;
@@ -19,15 +19,19 @@
     }
   }
   &__wrapper {
-    position: absolute;
-    transition: 0.6s ease-in-out;
-    right: 0;
-    width: 300px;
+    position: fixed;
+    transition: 0.4s ease-in-out;
+    left: -400px;
+    width: 400px;
     height: 100%;
     background-color: #333333;
     color: #fff;
-    padding: 10px 15px;
-    @media (max-width: 650px) {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    &-active {
+      left: 0;
+    }
+    @media (max-width: 700px) {
       & {
         width: 100%;
         left: -100%;
@@ -94,15 +98,46 @@
       }
     }
   }
+  &__tabs {
+    display: grid;
+    grid-auto-rows: 70px;
+    padding: 65px 0 15px;
+    background-color: #000000;
+    .tab-active {
+      background-color: #333333;
+      border: none;
+    }
+    &_item {
+      border-right: 2px solid #000;
+      border-top: 2px solid #000;
+      border-bottom: 2px solid #000;
+      background-color: #000000;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      padding: 15px 5px;
+      transition: 0.4s;
+      &:hover {
+        background-color: #333333;
+      }
+      &:active {
+        background-color: #ffffff50;
+      }
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
   &__main {
     display: grid;
     grid-template-rows: auto 1fr;
     height: 100%;
+    padding: 15px 10px;
     &_search {
       display: grid;
       align-items: center;
       grid-template-columns: 20px 1fr 20px;
-      margin-left: 50px;
       grid-gap: 10px;
       background-color: #fff;
       padding: 10px 15px;
@@ -134,7 +169,7 @@
       margin-top: 20px;
       padding: 0 0px 20px 10px;
       overflow: auto;
-      @media (max-width: 650px) {
+      @media (max-width: 700px) {
         & {
           padding: 0px 0px 20px 0px;
         }
@@ -174,6 +209,85 @@
         @include line_max(1);
         font-size: 0.8rem;
         letter-spacing: 0.8px;
+      }
+    }
+  }
+  .themes {
+    padding: 15px 10px;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    input[type="range"] {
+      width: 100%;
+      height: 4px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 100px;
+      background-color: #000;
+      background-image: linear-gradient(#fff, #fff);
+      background-repeat: no-repeat;
+      cursor: pointer;
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s;
+        background-color: #fff;
+      }
+
+      &::-ms-thumb {
+        -webkit-appearance: none;
+        width: 20;
+        height: 20;
+        border-radius: 50%;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.1s;
+        background-color: #ffffff;
+      }
+
+      &::-webkit-slider-thumb:hover {
+        background-color: #fff;
+      }
+
+      &:hover::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+      }
+    }
+    &__slider {
+      display: flex;
+      align-items: center;
+    }
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 130px;
+    }
+    &__item {
+      width: 100%;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px 10px;
+      transition: 0.3s;
+      &_name {
+        margin-bottom: 5px;
+        // Ограничение количества строк. Количество строк указывать в line-clamp и -webkit-line-clamp //
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-clamp: 1;
+        -webkit-line-clamp: 1;
+      }
+      &_preview {
+        width: 100%;
+        object-fit: cover;
+      }
+      &:hover {
+        background-color: #ffffff50;
       }
     }
   }

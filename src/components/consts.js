@@ -8,6 +8,10 @@ import audio2 from "../assets/music/Cheri cheri lady/Modern Talking - Cheri Cher
 import audio3 from "../assets/music/Don't Stop Me Now/Queen - Don't Stop Me Now (Official Video).mp3"
 import audio4 from "../assets/music/Sara perche ti amo/Sarà perchè ti amo - Ricchi e poveri - testo.mp3"
 
+import background1 from "../assets/background/rainTheme.mp4";
+import background2 from "../assets/background/stars.mp4";
+import background3 from "../assets/background/storm.mp4";
+
 
 export const trackList = [
   {
@@ -59,4 +63,28 @@ export const trackList = [
       "#FFFFFF",
     ]
   }
+]
+
+
+
+export const backgrounds = [
+  {
+    id: 1,
+    background: background1,
+    name: "Rain",
+    isDark: false,
+  },
+  {
+    id: 2,
+    background: background2,
+    name: "Star sky",
+    isDark: true,
+  },
+  {
+    id: 3,
+    background: background3,
+    name: "Storm",
+    isDark: false,
+  },
+
 ]

@@ -1,46 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/SideBar.scss";
-import { FaSearch } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
+import { LuListMusic } from "react-icons/lu";
+import { LuPaintbrush2 } from "react-icons/lu";
+
 import { useDispatch, useSelector } from 'react-redux';
-import { clickBurger, searching } from "../store/style/styleSlice"
-import SideBarItem from './SideBarItem';
+import { clickBurger } from "../store/style/styleSlice"
 import { trackList } from './consts';
-import { isColorDark } from '../helpers/func';
+import MusicTab from './MusicTab';
+import ThemesTab from './ThemesTab';
 
 const SideBar = () => {
   const burger = useSelector((state) => state.style.burger);
-  const trackListSearch = useSelector((state) => state.style.trackList);
-  const trackId = useSelector((state) => state.style.trackId);
+  const theme = useSelector((state) => state.style.theme);
   const dispatch = useDispatch();
 
-  const [inpLength, setInpLength] = useState(0);
-  const [search, setSearch] = useState("");
-
-  const [curr, setCurr] = useState(null);
-
-  useEffect(() => {
-    setCurr(trackList[trackId]);
-  }, [trackId, trackList]);
-
-  function handleSearch(e) {
-    setSearch(e.target.value);
-  };
-
-  useEffect(() => {
-    dispatch(searching(search));
-    setInpLength(search.length);
-  }, [search])
-
-  function burgerColor() {
-    if (curr) {
-      if (isColorDark(curr.mainColor)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
+  const [tab, setTab] = useState(0);
 
   return (
     <>
@@ -52,39 +26,21 @@ const SideBar = () => {
           >
             <span
               className={
-                `burger-line ${burgerColor() ? "burger-light" : "burger-dark"}`
+                `burger-line ${theme.isDark ? "burger-light" : "burger-dark"}`
               }
             ></span>
           </a>
-          <div className="sidebar__main">
-            <label className="sidebar__main_search" htmlFor="search">
-              <label htmlFor="search" className="sidebar__main_search-icon">
-                <FaSearch />
-              </label>
-              <input
-                type="text"
-                id='search'
-                className="sidebar__main_search-input"
-                onInput={(e) => handleSearch(e)}
-                value={search}
-              />
-              <label
-                className="sidebar__main_search-erase"
-                htmlFor="search"
-                onClick={() => setSearch("")}>
-                {
-                  inpLength ?
-                    <AiOutlineClose />
-                    : null
-                }
-              </label>
-            </label>
-            <div className="sidebar__main_list">
-              {
-                trackListSearch?.map((e, i) => <SideBarItem item={e} key={i} />)
-              }
-            </div>
+          <div className="sidebar__tabs">
+            <a className={`sidebar__tabs_item ${!tab ? "tab-active" : ""}`} onClick={() => setTab(0)}>
+              <LuListMusic />
+            </a>
+            <a className={`sidebar__tabs_item ${tab ? "tab-active" : ""}`} onClick={() => setTab(1)}>
+              <LuPaintbrush2 />
+            </a>
           </div>
+          {
+            tab ? <ThemesTab /> : <MusicTab />
+          }
         </div>
       </div>
     </>

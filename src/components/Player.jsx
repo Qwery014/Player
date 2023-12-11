@@ -11,6 +11,8 @@ import { isColorDark } from '../helpers/func';
 
 const Player = () => {
   const trackId = useSelector((state) => state.style.trackId);
+  const blur = useSelector(state => state.style.blur);
+  const theme = useSelector(state => state.style.theme);
   const dispatch = useDispatch();
 
   const [play, setPlay] = useState(false);
@@ -22,21 +24,25 @@ const Player = () => {
 
   useEffect(() => {
     setCurr(trackList[trackId]);
+    setPlay(false);
+    setPercent(0);
   }, [trackId, trackList]);
+
+
+
+  function onQueueChange(trackInd) {
+    setPlay(false);
+    dispatch(switchTrack(trackInd));
+    setPercent(0);
+  }
 
   function changeQueue(i) {
     if (i > trackList.length - 1) {
-      setPlay(false);
-      dispatch(switchTrack(0));
-      console.log(i)
+      onQueueChange(0)
     } else if (i < 0) {
-      setPlay(false);
-      dispatch(switchTrack(trackList.length - 1));
-      console.log(trackList.length - 1);
+      onQueueChange((trackList.length - 1))
     } else {
-      setPlay(false);
-      dispatch(switchTrack(i));
-      console.log(i)
+      onQueueChange((i))
     }
   }
 
@@ -47,6 +53,7 @@ const Player = () => {
   });
 
   const audio = useRef(null);
+  const video = useRef(null);
 
   function changeSeek(e) {
     audio.current.currentTime = e.target.value;
@@ -62,11 +69,11 @@ const Player = () => {
 
   function pauseFunc() {
     setPlay(false);
-    console.log("pause");
+    video.current.pause();
   }
   function playFunc() {
     setPlay(true);
-    console.log("play");
+    video.current.play();
   }
 
   function onLoaded(currentAudio) {
@@ -81,8 +88,7 @@ const Player = () => {
     if (isFirst) {
       setTimeout(() => {
         setPlay(true);
-      }, 1000);
-      console.log(play)
+      }, 500);
     } else {
       setIsFirst(1);
     }
@@ -94,38 +100,22 @@ const Player = () => {
         className="player__background"
         style={{
           backgroundColor: curr ? curr.mainColor : "#000",
+          filter: `blur(${blur / 15}px)`,
         }}
       >
-        <div className={`balls-wrapper ${play ? "balls-wrapper-anim" : ""}`}>
-          <div
-            className="ball-1"
-            style={{
-              width: play ? "20vw" : 0,
-              height: play ? "20vw" : 0
-            }}
-          ></div>
-          <div
-            className="ball-2"
-            style={{
-              width: play ? "20vw" : 0,
-              height: play ? "20vw" : 0
-            }}
-          ></div>
-          <div
-            className="ball-3"
-            style={{
-              width: play ? "20vw" : 0,
-              height: play ? "20vw" : 0
-            }}
-          ></div>
-        </div>
+        <video
+          src={theme.background}
+          ref={video}
+          onLoadedMetadata={(e) => e.target.volume = 0}
+          onEnded={e => { e.target.currentTime = 0; e.target.play() }}
+        />
       </div>
       <div className="player__container"
-        style={{ color: curr ? isColorDark(curr.mainColor) ? ("#ffffff") : ("#000000") : "", }}>
+        style={{ color: theme.isDark ? ("#ffffff") : ("#000000") }}>
         <div
           className="player__container_background"
           style={{
-            backgroundColor: curr ? isColorDark(curr.mainColor) ? ("#ffffff50") : ("#00000050") : "",
+            backgroundColor: theme.isDark ? ("#ffffff20") : ("#00000020"),
           }}
         ></div>
         <div className="player__wrapper">
@@ -201,7 +191,6 @@ const Player = () => {
                       onLoadedMetadata={e => onLoaded(e.target)}
                       onPause={pauseFunc}
                       onPlay={playFunc}
-                      onDurationChange={() => console.log("changed")}
                     />
                   </div>
                 </div>
