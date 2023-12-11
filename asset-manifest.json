@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Player/static/css/main.4b2ee891.css",
-    "main.js": "/Player/static/js/main.ab55e1d5.js",
+    "main.js": "/Player/static/js/main.c09a164e.js",
     "static/media/rainTheme.mp4": "/Player/static/media/rainTheme.e5fc2d7582632fe9e496.mp4",
     "static/media/Queen - Don't Stop Me Now (Official Video).mp3": "/Player/static/media/Queen - Don't Stop Me Now (Official Video).d55a347196c1324727a9.mp3",
     "static/media/Billie Eilish - Bellyache.mp3": "/Player/static/media/Billie Eilish - Bellyache.13f978fe7ce629f9affc.mp3",
@@ -15,10 +15,10 @@
     "static/media/maxresdefault.jpg": "/Player/static/media/maxresdefault.4a0ba44b6f4ebed50548.jpg",
     "index.html": "/Player/index.html",
     "main.4b2ee891.css.map": "/Player/static/css/main.4b2ee891.css.map",
-    "main.ab55e1d5.js.map": "/Player/static/js/main.ab55e1d5.js.map"
+    "main.c09a164e.js.map": "/Player/static/js/main.c09a164e.js.map"
   },
   "entrypoints": [
     "static/css/main.4b2ee891.css",
-    "static/js/main.ab55e1d5.js"
+    "static/js/main.c09a164e.js"
   ]
 }
