@@ -7,7 +7,7 @@ const initialState = {
   burger: false,
   trackList: trackList,
   trackId: 0,
-  blur: 100,
+  blur: 50,
   theme: backgroundLocal ? JSON.parse(backgroundLocal) : backgrounds[0],
 }
 

@@ -133,6 +133,7 @@
     display: grid;
     grid-template-rows: auto 1fr;
     height: 100%;
+    overflow: hidden;
     padding: 15px 10px;
     &_search {
       display: grid;
@@ -169,6 +170,7 @@
       margin-top: 20px;
       padding: 0 0px 20px 10px;
       overflow: auto;
+      height: 100%;
       @media (max-width: 700px) {
         & {
           padding: 0px 0px 20px 0px;

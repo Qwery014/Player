@@ -6,7 +6,6 @@ import { TbPlayerSkipForwardFilled } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
 import { switchTrack } from "../store/style/styleSlice";
 import { trackList } from './consts';
-import { isColorDark } from '../helpers/func';
 
 
 const Player = () => {
@@ -22,6 +21,9 @@ const Player = () => {
   const [curr, setCurr] = useState(null);
   const [isFirst, setIsFirst] = useState(0);
 
+  const audio = useRef(null);
+  const video = useRef(null);
+
   useEffect(() => {
     setCurr(trackList[trackId]);
     setPlay(false);
@@ -34,6 +36,7 @@ const Player = () => {
     setPlay(false);
     dispatch(switchTrack(trackInd));
     setPercent(0);
+    video.current.pause();
   }
 
   function changeQueue(i) {
@@ -46,14 +49,10 @@ const Player = () => {
     }
   }
 
-
   const [duration, setDuration] = useState({
     durMin: 0,
     durSec: 0
   });
-
-  const audio = useRef(null);
-  const video = useRef(null);
 
   function changeSeek(e) {
     audio.current.currentTime = e.target.value;
@@ -71,6 +70,7 @@ const Player = () => {
     setPlay(false);
     video.current.pause();
   }
+
   function playFunc() {
     setPlay(true);
     video.current.play();
@@ -87,7 +87,7 @@ const Player = () => {
 
     if (isFirst) {
       setTimeout(() => {
-        setPlay(true);
+        playFunc();
       }, 500);
     } else {
       setIsFirst(1);

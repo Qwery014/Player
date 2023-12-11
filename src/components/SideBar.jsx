@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "../styles/SideBar.scss";
 import { LuListMusic } from "react-icons/lu";
 import { LuPaintbrush2 } from "react-icons/lu";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { clickBurger } from "../store/style/styleSlice"
-import { trackList } from './consts';
 import MusicTab from './MusicTab';
 import ThemesTab from './ThemesTab';
 
