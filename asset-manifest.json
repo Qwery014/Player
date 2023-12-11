@@ -1,21 +1,24 @@
 {
   "files": {
-    "main.css": "/Player/static/css/main.15d2ed46.css",
-    "main.js": "/Player/static/js/main.50006c2c.js",
+    "main.css": "/Player/static/css/main.5d71371f.css",
+    "main.js": "/Player/static/js/main.6628d5c5.js",
+    "static/media/rainTheme.mp4": "/Player/static/media/rainTheme.e5fc2d7582632fe9e496.mp4",
     "static/media/Queen - Don't Stop Me Now (Official Video).mp3": "/Player/static/media/Queen - Don't Stop Me Now (Official Video).d55a347196c1324727a9.mp3",
     "static/media/Billie Eilish - Bellyache.mp3": "/Player/static/media/Billie Eilish - Bellyache.13f978fe7ce629f9affc.mp3",
     "static/media/Modern Talking - Cheri Cheri Lady (Official Music Video).mp3": "/Player/static/media/Modern Talking - Cheri Cheri Lady (Official Music Video).a7605897bd9b89d99d84.mp3",
     "static/media/Sarà perchè ti amo - Ricchi e poveri - testo.mp3": "/Player/static/media/Sarà perchè ti amo - Ricchi e poveri - testo.3a6f35e2cb98d42dee0b.mp3",
+    "static/media/stars.mp4": "/Player/static/media/stars.e8abf55e7aa066bd1e9c.mp4",
+    "static/media/storm.mp4": "/Player/static/media/storm.1ced2cec5ed9b2b5137a.mp4",
     "static/media/pic.jpg": "/Player/static/media/pic.6d2c9874531353dbd6c0.jpg",
     "static/media/115730861.jpg": "/Player/static/media/115730861.81c12279972636aadd98.jpg",
     "static/media/jpg": "/Player/static/media/27ca78589c387bdc552e46281ba71bd2.17e05ff678325fd103e9.jpg",
     "static/media/maxresdefault.jpg": "/Player/static/media/maxresdefault.4a0ba44b6f4ebed50548.jpg",
     "index.html": "/Player/index.html",
-    "main.15d2ed46.css.map": "/Player/static/css/main.15d2ed46.css.map",
-    "main.50006c2c.js.map": "/Player/static/js/main.50006c2c.js.map"
+    "main.5d71371f.css.map": "/Player/static/css/main.5d71371f.css.map",
+    "main.6628d5c5.js.map": "/Player/static/js/main.6628d5c5.js.map"
   },
   "entrypoints": [
-    "static/css/main.15d2ed46.css",
-    "static/js/main.50006c2c.js"
+    "static/css/main.5d71371f.css",
+    "static/js/main.6628d5c5.js"
   ]
 }
