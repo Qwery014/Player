@@ -106,7 +106,10 @@ const Player = () => {
         <video
           src={theme.background}
           ref={video}
-          onLoadedMetadata={(e) => e.target.volume = 0}
+          onLoadedMetadata={(e) => {
+            e.target.volume = 0;
+            return play ? e.target.play() : null;
+          }}
           onEnded={e => { e.target.currentTime = 0; e.target.play() }}
         />
       </div>
